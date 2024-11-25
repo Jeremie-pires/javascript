@@ -64,10 +64,8 @@
             function Calculer() {
                 const input1 = document.getElementById('poids');
                 const poids = input1.value;
-                input1.value = '';
                 const input2 = document.getElementById('taille');
                 const taille = input2.value;
-                input2.value = '';
                 const IMC = Math.round(poids/(taille*taille)*10)/10;
                 document.getElementById('IMC').textContent = IMC;
 
@@ -82,10 +80,21 @@
                 catégorie = "Obésité";
                 } else if (IMC >= 35 && IMC < 40) {
                 catégorie = "Obésité sévère";
-                } else {
+                } else if (40 < IMC) {
                 catégorie = "Obésité morbide";
                 }  
                 document.getElementById('catégorie').textContent = catégorie;
+
+                const taillecm = taille*100;
+                const Objectif = taillecm-100-(taillecm-150)/4;
+                document.getElementById('Objectif').textContent = Objectif;
+                const différence = Objectif - poids
+                document.getElementById('différence').textContent = différence;
+                let symbole =''
+                if (différence > 0) {
+                  symbole = "+";
+                }
+                document.getElementById('symbole').textContent = symbole;
             }
           </script>
          
@@ -93,7 +102,7 @@
           <div class="alert my-3 alert-secondary">
             <div>IMC : <b id="IMC"></b></div>
             <div>Catégorie : <b id="catégorie"></b></div>
-            <div>Objectif : kg (-9.0 kg)</div>
+            <div>Objectif : <b id="Objectif"></b> (<c id="symbole"></c><d id="différence"></d>kg)</div>
           </div>
           
         </div>
@@ -102,7 +111,7 @@
     <footer class="py-5 bg-dark">
       <div class="container px-4 px-lg-5">
         <p class="m-0 text-center text-white">
-          Copyright &copy; Seven Valley 2024
+          Copyright &copy; Seven Valley 2024 Et moi aussi un peu
         </p>
       </div>
     </footer>
