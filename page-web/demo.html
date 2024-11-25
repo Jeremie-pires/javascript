@@ -1,0 +1,12 @@
+<input id="nom" />
+<button onclick ="Afficher()">GO</button>
+<h1 id="demo"></h1>
+<script>
+    function Afficher(){
+        const input = document.getElementById('nom');
+        const nom = input.value;
+        input.value ='';
+        const demo = document.getElementById('demo');
+        demo.innerHTML = nom.toUpperCase();
+    }
+</script>
