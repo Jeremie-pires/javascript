@@ -1,45 +1,22 @@
-let fruits = [];
-
-const liste = () => {
-  const tbody = document.getElementById('myTbody');
-  tbody.innerHTML = '';
-
-  fruits.forEach((fruit, index) => {
-    const tr = document.createElement('tr');
-    const tdFruit = document.createElement('td');
-    tdFruit.textContent = fruit;
-    tr.appendChild(tdFruit);
-
-    const tdAction = document.createElement('td');
-    const bouton = document.createElement('button');
-    bouton.classList.add('btn', 'btn-danger');
-    bouton.innerHTML = '<i class="fa fa-trash"></i>';
-    bouton.addEventListener('click', () => supprimer(index));
-    tdAction.appendChild(bouton);
-    tr.appendChild(tdAction);
-
-    tbody.appendChild(tr);
-  });
-};
-
-const add = () => {
-  const inputFruit = document.getElementById('fruit');
-  const fruit = inputFruit.value.trim();
-
-  if (fruit) {
-    fruits.push(fruit);
-    inputFruit.value = ''; 
-    liste();
-  }
-};
-
-const supprimer = (index) => {
-  fruits.splice(index, 1);
-  liste();
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-  liste();
-
-  document.getElementById('btnAjouter').addEventListener('click', add);
-});
+// arrow function
+document.getElementById("btnAjouter").onclick = () => {
+    const myTbody = document.getElementById("myTbody");
+    const template = document.getElementById("myTr");
+    // le champ input id=fruit
+    const fruit = document.getElementById("fruit").value;
+    document.getElementById("fruit").value = "";
+    const clone = template.content.cloneNode(true);
+    // le premier td du template
+    clone.querySelectorAll("td")[0].textContent = fruit;
+    clone.querySelector("button").onclick = (event) => {
+      const nom =event.target.closest("tr").querySelector('td').innerHTML
+      const test = confirm('Effacer '+nom+' ?');
+      if (test) {
+        const selecteur = event.target;
+        //selecteur.parentElement.parentElement.remove()
+        selecteur.closest("tr").remove();
+       
+      }
+    };
+    myTbody.appendChild(clone);
+  };
