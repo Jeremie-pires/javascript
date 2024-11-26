@@ -60,6 +60,16 @@
             <i class="fa-solid fa-weight-scale"></i>
           </button>
 
+          
+          <style>
+            .marron { background-color: rgba(165, 42, 42, 0.677);}
+            .rouge { background-color: rgb(214, 21, 21);}
+            .orange { background-color: orange;}
+            .jaune { background-color: yellow;}
+            .vert { background-color: rgb(7, 187, 7);}
+            .bleu { background-color: rgb(40, 238, 231);}    
+          </style>
+          
           <script>
             function Calculer() {
                 const input1 = document.getElementById('poids');
@@ -69,21 +79,32 @@
                 const IMC = Math.round(poids/(taille*taille)*10)/10;
                 document.getElementById('IMC').textContent = IMC;
 
-                let catégorie ='';
+                let catégorie = '';
+                const couleurElement = document.getElementById('Couleur');
+                const classesCouleurs = ['bleu', 'vert', 'jaune', 'orange', 'rouge', 'marron'];
+                couleurElement.classList.remove(...classesCouleurs);
+
                 if (IMC < 18.5) {
                 catégorie = "Maigreur";
+                couleurElement.classList.add('bleu');
                 } else if (IMC >= 18.5 && IMC < 25) {
                 catégorie = "Normal";
+                couleurElement.classList.add('vert');
                 } else if (IMC >= 25 && IMC < 30) {
                 catégorie = "Surpoids";
+                couleurElement.classList.add('jaune');
                 } else if (IMC >= 30 && IMC < 35) {
                 catégorie = "Obésité";
+                couleurElement.classList.add('orange');
                 } else if (IMC >= 35 && IMC < 40) {
                 catégorie = "Obésité sévère";
+                couleurElement.classList.add('rouge');
                 } else if (40 < IMC) {
                 catégorie = "Obésité morbide";
+                couleurElement.classList.add('marron');
                 }  
                 document.getElementById('catégorie').textContent = catégorie;
+                
 
                 const taillecm = taille*100;
                 const Objectif = taillecm-100-(taillecm-150)/4;
@@ -99,7 +120,7 @@
           </script>
          
 
-          <div class="alert my-3 alert-secondary">
+          <div class="alert my-3 alert-secondary" id="Couleur">
             <div>IMC : <b id="IMC"></b></div>
             <div>Catégorie : <b id="catégorie"></b></div>
             <div>Objectif : <b id="Objectif"></b> (<c id="symbole"></c><d id="différence"></d>kg)</div>
