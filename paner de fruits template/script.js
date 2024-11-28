@@ -1,22 +1,37 @@
-// arrow function
-document.getElementById("btnAjouter").onclick = () => {
-    const myTbody = document.getElementById("myTbody");
-    const template = document.getElementById("myTr");
-    // le champ input id=fruit
-    const fruit = document.getElementById("fruit").value;
-    document.getElementById("fruit").value = "";
+let fruits = [];
+
+const liste = () => {
+  const tbody = document.getElementById('myTbody');
+  tbody.innerHTML = '';
+
+  fruits.forEach((fruit) => {
+    const template = document.getElementById("templateTr");
+    // cloner le template
     const clone = template.content.cloneNode(true);
-    // le premier td du template
-    clone.querySelectorAll("td")[0].textContent = fruit;
-    clone.querySelector("button").onclick = (event) => {
-      const nom =event.target.closest("tr").querySelector('td').innerHTML
-      const test = confirm('Effacer '+nom+' ?');
-      if (test) {
-        const selecteur = event.target;
-        //selecteur.parentElement.parentElement.remove()
-        selecteur.closest("tr").remove();
-       
+    let td = clone.querySelector("td");
+    td.textContent = fruit;
+    
+    let btn = clone.querySelector("button");
+    btn.onclick = (event) => {
+      if (confirm("Voulez-vous enlever : " + fruit + " ?")) {
+       const indice =  event.target.closest("tr").rowIndex -1;
+       fruits.splice(indice,1);
+       afficher();
       }
     };
-    myTbody.appendChild(clone);
-  };
+    // ajouter le tr cloner ds le tableau html
+    tbody.appendChild(clone);
+  });
+};
+
+document.getElementById('btn-ajouter').onclick = () => {
+  const input = document.getElementById('fruit');
+  const fruitName = input.value.trim();
+
+  if (fruitName) {
+    fruits.push(fruitName);
+    input.value = ''; 
+    liste();
+  }
+};
+ 
