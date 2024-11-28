@@ -57,19 +57,7 @@
             </tr>
           </thead>
           <!-- tbody>tr>td*2 -->
-          <tbody id="myTbody">
-          </tbody>
-          <template id="myTemplate">
-          <tr id="myTr">
-            <td>
-                <td>
-                    <button class="btn btn-danger">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-            </td>
-          </tr>
-          </template>
+          <tbody id="myTbody"></tbody>
         </table>
       </div>
     </div>
@@ -78,6 +66,16 @@
         <p class="m-0 text-center text-white">Copyright &copy;IMC 2023</p>
       </div>
     </footer>
-    <script src="script.js" defer></script> 
+    <template id="myTr">
+      <tr>
+        <td>pomme</td>
+        <td>
+        <button class="btn btn-danger">
+            <i class="fa fa-trash"></i>
+        </button>
+        </td>
+    </tr>
+    </template>
+    <script src="tp4.js"></script>
   </body>
 </html>
