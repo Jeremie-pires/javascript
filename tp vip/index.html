@@ -26,6 +26,10 @@
       background-color: #ccc;
     }
   </style>
+  <style>
+    .rouge {background-color: rgb(254, 60, 60);}
+    .vert {background-color: rgb(30, 203, 30);}
+  </style>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
@@ -45,6 +49,7 @@
                   aria-label="Prénom"
                   class="form-control"
                   placeholder="Prénom"
+                  id="inputprenom"
                 />
               </div>
               <div class="col-4">
@@ -52,10 +57,11 @@
                   aria-label="Nom"
                   class="form-control"
                   placeholder="Nom"
+                  id="inputnom"
                 />
               </div>
               <div class="col-1">
-                <button class="btn btn-success">
+                <button class="btn btn-success" id="btnAjouter">
                   <i class="fa fa-plus"></i>
                 </button>
               </div>
@@ -74,50 +80,22 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="table-success" data-indice="0">
-                <td>Jean</td>
-                <td>DUJARDIN</td>
-                <td>
-                  <button class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-warning">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr class="table-danger">
-                <td>Brad</td>
-                <td>PITT</td>
-                <td>
-                  <button class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-
-                <td>
-                  <button class="btn btn-warning">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </td>
-              </tr>
-              <tr class="table-danger">
-                <td>Bruce</td>
-                <td>Willis</td>
-                <td>
-                  <button class="btn btn-danger">
-                    <i class="fa fa-trash"></i>
-                  </button>
-                </td>
-
-                <td>
-                  <button class="btn btn-warning">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </td>
-              </tr>
+                <template>
+                    <tr class="table-success" data-indice="0" id="box">
+                        <td id="prenom"></td>
+                        <td id="nom"></td>
+                        <td>
+                          <button class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                          </button>
+                        </td>
+                        <td>
+                          <button class="btn btn-warning">
+                            <i class="fa fa-check"></i>
+                          </button>
+                        </td>
+                      </tr>
+                </template>
             </tbody>
           </table>
         </div>
