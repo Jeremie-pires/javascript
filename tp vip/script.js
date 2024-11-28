@@ -43,6 +43,8 @@ const afficher = () => {
 
         invit = clone.querySelector(".btn-warning");
         invit.onclick = (event) => {
+            let tr = event.target.closest("tr");
+            let index = tr.rowIndex - 1;
             personnes[index].status = !personnes[index].status;
                 saveLocal();
                 afficher();

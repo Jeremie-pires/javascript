@@ -80,22 +80,6 @@
               </tr>
             </thead>
             <tbody id="myTbody">
-                <template id="templateTr">
-                    <tr class="table-success" data-indice="0" id="box">
-                        <td id="prenom"></td>
-                        <td id="nom"></td>
-                        <td>
-                          <button class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-warning">
-                            <i class="fa fa-check"></i>
-                          </button>
-                        </td>
-                      </tr>
-                </template>
             </tbody>
           </table>
         </div>
@@ -111,6 +95,22 @@
         </p>
       </div>
     </footer>
+    <template id="templateTr">
+        <tr class="table-success" data-indice="0" id="box">
+            <td id="prenom"></td>
+            <td id="nom"></td>
+            <td>
+              <button class="btn btn-danger">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-warning">
+                <i class="fa fa-check"></i>
+              </button>
+            </td>
+          </tr>
+    </template>
     <script src="script.js" defer></script>
   </body>
 </html>
