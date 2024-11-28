@@ -1,74 +1,75 @@
 let series = [];
 let tabFav = [];
 
-document.getElementById('btnSearch').onclick = async() => {
-    const serie = document.getElementById('serie').value;
-    const key = '82fe5131';
-    const url = `https://www.omdbapi.com/?apikey=${key}&s=${serie}&type=series`;
-    const response = await fetch(url);
-    const series = await response.json();
-    afficherSeries();
-};
+const saveLocal = () => {
+    localStorage.setItem('series', JSON.stringify(tabFav));
+}
 
-const getSerie=async(id)=>{
+const getSerie=async(imdb)=>{
     const key = '82fe5131'
-    const url = `https://www.omdbapi.com/?apikey=${key}&$i=${id}`
+    let url = `https://www.omdbapi.com/?apikey=${key}&$i=${imdb}`
     const response = await fetch(url);
-    const serie = await r.json();
+    const serie = await response.json();
     return serie;
-    }
+}
+
 
 const afficherSeries = () => {
+    console.log(series);
     const tbody = document.getElementById('myTbody');
     tbody.innerHTML = '';
-    for (let serie of series) {
+    for (let s of series) {
         const template = document.getElementById("templateTr");
         const clone = template.content.cloneNode(true);
-        let tr = clone.querySelector("tr");
         let td = clone.querySelectorAll('td');
-        td[0].textContent = serie.Title;
-        td[1].textContent = serie.Year;
-        td[2].textContent = serie.Poster;
-        clone.querySelector('img').src = serie.Poster;
+        td[0].textContent = s.Title;    
+        td[1].textContent = s.Year;
+        clone.querySelector('img').src = s.Poster;
         clone.querySelector('button').onclick = async(event) => {
             const tr = event.target.closest("tr");
-            const id = tr.rawIndex - 1;
-            let serie = await getSerie(series[index].imdbID);
+            const id = tr.rowIndex - 1;
+            let serie = await getSerie(series[id].imdbID);
 
             tabFav.push(serie);
             afficherFav();
-            serie.splice(id, 1);
+            series.splice(id, 1);
             saveLocal();
         };
         tbody.appendChild(clone);
-    };
-}
+    }
+};
 
 const afficherFav = () => {
     const tbody2 = document.getElementById('myTbody2');
-    tbody.innerHTML = '';
-    for (let serie of tabFav) {
+    tbody2.innerHTML = '';
+    for (let f of tabFav) {
         const template2 = document.getElementById("templateTr2");
         const clone = template2.content.cloneNode(true);
-        let tr = clone.querySelector("tr");
-        let td = clone.querySelectorAll('td');
-        td[0].textContent = serie.Title;
-        td[1].textContent = serie.Year;
-        td[2].textContent = serie.imdbRating;
-        td[3].textContent = serie.Poster;
-        clone.querySelector('img').src = serie.Poster;
-        clone.querySelector('button').onclick = async(event) => {
+        const td = clone.querySelectorAll('td');
+        td[0].textContent = f.Title;
+        td[1].textContent = f.Year;
+        td[2].textContent = f.imdbRating;
+        clone.querySelector('img').src = f.Poster;
+        clone.querySelector('button').onclick = (event) => {
             const tr = event.target.closest("tr");
             const id = tr.rawIndex - 1;
-            let serie = await getSerie(tabFav[index].imdbID);
-
             tabFav.splice(id, 1);
-            saveLocal();
             afficherFav();
+            saveLocal();
         };
         tbody2.appendChild(clone);
     };
 }
+
+document.getElementById('btnSearch').onclick = async() => {
+    let serie = document.getElementById('serie').value;
+    const key = '82fe5131';
+    let url = `https://www.omdbapi.com/?apikey=${key}&s=${serie}&type=series`;
+    const response = await fetch(url);
+    const data = await response.json();
+    series = data.Search;
+    afficherSeries();
+};
 
 const data = localStorage.getItem('series');
 if (data) {
