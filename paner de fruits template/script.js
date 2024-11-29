@@ -4,9 +4,8 @@ const liste = () => {
   const tbody = document.getElementById('myTbody');
   tbody.innerHTML = '';
 
-  for (fruit of fruits) {
+  for (let fruit of fruits) {
     const template = document.getElementById("templateTr");
-    // cloner le template
     const clone = template.content.cloneNode(true);
     let td = clone.querySelector("td");
     td.textContent = fruit;
@@ -15,22 +14,18 @@ const liste = () => {
       if (confirm("Voulez-vous enlever : " + fruit + " ?")) {
        const indice =  event.target.closest("tr").rowIndex -1;
        fruits.splice(indice,1);
-       afficher();
+       liste();
       }
     };
-    // ajouter le tr cloner ds le tableau html
     tbody.appendChild(clone);
   }
 };
 
 document.getElementById('btn-ajouter').onclick = () => {
-  const input = document.getElementById('fruit');
-  const fruitName = input.value.trim();
-
-  if (fruitName) {
-    fruits.push(fruitName);
-    input.value = ''; 
-    liste();
-  }
+  let fruitName = document.getElementById('fruit').value;
+  document.getElementById('fruit').value = '';
+  fruits.push(fruitName);
+  liste();
 };
+
  
