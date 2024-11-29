@@ -24,13 +24,9 @@ const afficher = () => {
         td[0].textContent = personne.prenom;
         td[1].textContent = personne.nom;
 
-        if (personne.status) {
-            tr.classList.add('vert');
-            tr.classList.remove('rouge');
-        } else {
-            tr.classList.add('rouge');
-            tr.classList.remove('vert');
-        }
+        personne.status 
+                ? tr.classList.add("table-success") 
+                : tr.classList.add("table-danger");
 
         sup = clone.querySelector(".btn-danger");   
         
@@ -40,6 +36,17 @@ const afficher = () => {
                 saveLocal();
                 afficher();
             };
+            if (personne.status) {
+                tr.classList.remove('table-danger');
+                tr.classList.add('table-success');
+                tr.classList.remove('rouge');
+                tr.classList.add('vert');
+            } else {
+                tr.classList.remove('table-success');
+                tr.classList.add('table-danger');
+                tr.classList.remove('vert');
+                tr.classList.add('rouge');
+            }
 
         invit = clone.querySelector(".btn-warning");
         invit.onclick = (event) => {
