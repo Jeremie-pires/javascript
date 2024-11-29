@@ -63,6 +63,7 @@ const afficherFav = () => {
 
 document.getElementById('btnSearch').onclick = async() => {
     let serie = document.getElementById('serie').value;
+    document.getElementById('serie').value = '';
     const key = '82fe5131';
     let url = `https://www.omdbapi.com/?apikey=${key}&s=${serie}&type=series`;
     const response = await fetch(url);
